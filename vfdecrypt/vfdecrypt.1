@@ -3,9 +3,9 @@
 vfdecrypt \- decrypt encrypted filevault disk images
 .SH SYNOPSIS
 .B vfdecrypt
--i in-file -p password -o out-file
+-i in-file [ -p password | -k aeskey||hmacsha1key ] -o out-file
 .SH DESCRIPTION
-vile fault decrypts encrypted Mac OS X disk image files. It supports both version 1 and 2 of the non-documented proprietary format.
+vilefault decrypts encrypted Mac OS X disk image files. It supports both version 1 and 2 of the non-documented proprietary format. It is possible to pass either a password or a concatenation of an aeskey and the HMAC SHA-1 key. If a password is passed, the aeskey and the hmac will be derived.
 .SH OPTIONS
 .TP
 .B \-i
