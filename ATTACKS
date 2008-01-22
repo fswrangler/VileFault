@@ -1,0 +1,48 @@
+Other people who enjoyed the rest of this package may be interested in this small and incomplete list of attack vectors.
+
+Obvious:
+Weak passwords
+Any ring 0 access. Has Apple patched those nasty remote airport vulnerabilties? (Nope![0])
+Firewire DMA attacks (Owned by an iPod[1]) 
+
+Sifting through the sleepimage (Thanks safesleep!):
+/var/vm/sleepimage
+
+Sifting through the swapfiles (How about contents of images as well as unhashed passwords?):
+/var/vm/swapfile{0,1,2,n}
+
+Disabling encrypted swap with a single line in the /etc/hostconfig file (see /etc/rc for relevant /sbin/dynamic_pager calling):
+ENCRYPTSWAP=-YES-
+ENCRYPTSWAP=-NO-
+
+Or you can patch the way dynamic_pager is called (as borrowed from /etc/rc) thus half tricking the UI (The system preference will have no effect if you patch /tc/rc but the box will remain checked):
+ if [ ${ENCRYPTSWAP:=-NO-} = "-YES-" ]; then
+    encryptswap="-E"
+else
+    encryptswap=""
+fi
+/sbin/dynamic_pager ${encryptswap} -F ${swapdir}/swapfile
+
+SWAP keys are generated in xnu-792.13.8/osfmk/vm/vm_pageout.c. Specifically consider:
+extern u_long random(void);
+swap_crypt_ctx_initialize(void);
+
+Hilarious kernel source quotes of the day (any day really). Found in xnu-792.13.8 and earlier:
+
+From xnu-792.13.8/osfmk/vm/vm_pageout.c:
+/*
+ * Encryption data.
+ * "iv" is the "initial vector".  Ideally, we want to
+ * have a different one for each page we encrypt, so that
+ * crackers can't find encryption patterns too easily.
+ */
+
+/*
+ * No need for locking to protect swap_crypt_ctx_initialized
+ * because the first use of encryption will come from the
+ * pageout thread (we won't pagein before there's been a pageout)
+ * and there's only one pageout thread.
+ */
+
+[0] See MOKB-30-11-2006 http://projects.info-pull.com/mokb/MOKB-30-11-2006.html
+[1] See FireWire - "All your memory are belong to us" @ http://md.hudora.de/presentations/ by Maximillian Dornseif

@@ -1,0 +1,22 @@
+vfcrack v0.2
+by David Hulton, Ralf-Philipp Weinmann, & Jacob Appelbaum
+
+BUILDING
+
+To build vfcrack just run make on the command line. make install should install the binaries into /usr/local/bin.
+
+To build the fpga image, download the source from openciphers and build it with ISE. After you build the bit file (or just use the vfcrack.bit file included in this distribution), just load it onto the Pico E-12 with PicoUtil and modify the swap2vf.sh script to boot whatever offset PicoUtil loads the file at. You can determine this offset by looking at the sector number in PicoUtil and multiplying it by 0x2000.
+
+RUNNING
+
+To run vfcrack simply supply the following arguments to vfcrack:
+
+./vfcrack <dictionary file> <dmg file>
+
+To use a Pico E-12 FPGA with vfcrack, simply supply the FPGA number as an additional argument. To run this on multiple FPGAs just split up the dictionary file depending on how many FPGAs you want to run it on and then fire up multiple instances of vfcrack for each FPGA and dictionary file.
+
+Example:
+
+./vfcrack dict test_v1.dmg 0
+./vfcrack dict test_v2.dmg 0
+
