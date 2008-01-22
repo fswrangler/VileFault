@@ -9,7 +9,7 @@
 /* block size of cipher in bytes (128 bits) */
 #define CIPHER_BLOCKSIZE	16
 /* chunk size (FileVault specific) */
-#define CHUNK_SIZE		4096
+#define DEFAULT_CHUNK_SIZE	4096
 /* number of iterations for PBKDF2 key derivation */
 #define PBKDF2_ITERATION_COUNT	1000
 
@@ -29,8 +29,21 @@ typedef struct {
 } cencrypted_v1_header;
 
 /* this structure is valid only if there's a recovery key defined */
+/* updated structure from iPhone DMG decryption effort */
 typedef struct {
-  uint8_t filler1[0x2a8];
+  unsigned char sig[8];
+  uint32_t version;
+  uint32_t enc_iv_size;
+  uint32_t unk1;
+  uint32_t unk2;
+  uint32_t unk3;
+  uint32_t unk4;
+  uint32_t unk5;
+  unsigned char uuid[16];
+  uint32_t blocksize;
+  uint64_t datasize;
+  uint64_t dataoffset;
+  uint8_t filler1[0x260];
   uint32_t kdf_algorithm;
   uint32_t kdf_prng_algorithm;
   uint32_t kdf_iteration_count;
