@@ -63,25 +63,25 @@ void dump_v2_header(void *hdr)
 }
 
 void adjust_v1_header_byteorder(cencrypted_v1_header *hdr) {
-  hdr->kdf_iteration_count = htonl(hdr->kdf_iteration_count);
-  hdr->kdf_salt_len = htonl(hdr->kdf_salt_len);
-  hdr->len_wrapped_aes_key = htonl(hdr->len_wrapped_aes_key);
-  hdr->len_hmac_sha1_key = htonl(hdr->len_hmac_sha1_key);
-  hdr->len_integrity_key = htonl(hdr->len_integrity_key);
+  hdr->kdf_iteration_count = ntohl(hdr->kdf_iteration_count);
+  hdr->kdf_salt_len = ntohl(hdr->kdf_salt_len);
+  hdr->len_wrapped_aes_key = ntohl(hdr->len_wrapped_aes_key);
+  hdr->len_hmac_sha1_key = ntohl(hdr->len_hmac_sha1_key);
+  hdr->len_integrity_key = ntohl(hdr->len_integrity_key);
 }
 
 void adjust_v2_header_byteorder(cencrypted_v2_pwheader *pwhdr) {
-  pwhdr->blocksize = htonl(pwhdr->blocksize);
-  swap64(pwhdr->datasize);
-  swap64(pwhdr->dataoffset);
-  pwhdr->kdf_algorithm = htonl(pwhdr->kdf_algorithm);
-  pwhdr->kdf_prng_algorithm = htonl(pwhdr->kdf_prng_algorithm);
-  pwhdr->kdf_iteration_count = htonl(pwhdr->kdf_iteration_count);
-  pwhdr->kdf_salt_len = htonl(pwhdr->kdf_salt_len);
-  pwhdr->blob_enc_iv_size = htonl(pwhdr->blob_enc_iv_size);
-  pwhdr->blob_enc_key_bits = htonl(pwhdr->blob_enc_key_bits);
-  pwhdr->blob_enc_algorithm = htonl(pwhdr->blob_enc_algorithm);
-  pwhdr->blob_enc_padding = htonl(pwhdr->blob_enc_padding);
-  pwhdr->blob_enc_mode = htonl(pwhdr->blob_enc_mode);
-  pwhdr->encrypted_keyblob_size = htonl(pwhdr->encrypted_keyblob_size);
+  pwhdr->blocksize = ntohl(pwhdr->blocksize);
+  pwhdr->datasize = ntohll(pwhdr->datasize);
+  pwhdr->dataoffset = ntohll(pwhdr->dataoffset);
+  pwhdr->kdf_algorithm = ntohl(pwhdr->kdf_algorithm);
+  pwhdr->kdf_prng_algorithm = ntohl(pwhdr->kdf_prng_algorithm);
+  pwhdr->kdf_iteration_count = ntohl(pwhdr->kdf_iteration_count);
+  pwhdr->kdf_salt_len = ntohl(pwhdr->kdf_salt_len);
+  pwhdr->blob_enc_iv_size = ntohl(pwhdr->blob_enc_iv_size);
+  pwhdr->blob_enc_key_bits = ntohl(pwhdr->blob_enc_key_bits);
+  pwhdr->blob_enc_algorithm = ntohl(pwhdr->blob_enc_algorithm);
+  pwhdr->blob_enc_padding = ntohl(pwhdr->blob_enc_padding);
+  pwhdr->blob_enc_mode = ntohl(pwhdr->blob_enc_mode);
+  pwhdr->encrypted_keyblob_size = ntohl(pwhdr->encrypted_keyblob_size);
 }

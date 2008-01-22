@@ -59,7 +59,7 @@ void compute_iv(uint32_t chunk_no, uint8_t *iv)
   unsigned char mdResult[MD_LENGTH];
   unsigned int mdLen;
   
-  chunk_no = htonl(chunk_no);
+  chunk_no = ntohl(chunk_no);
   HMAC_Init_ex(&hmacsha1_ctx, NULL, 0, NULL, NULL);
   HMAC_Update(&hmacsha1_ctx, (void *) &chunk_no, sizeof(uint32_t));
   HMAC_Final(&hmacsha1_ctx, mdResult, &mdLen);

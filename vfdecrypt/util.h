@@ -5,7 +5,7 @@
 
 #define _UTIL_H	1
 
-#define swap64(x) x = ((uint64_t) ntohl(x >> 32)) | (((uint64_t) ntohl((uint32_t) (x & 0xFFFFFFFF))) << 32)
+#define ntohll(x) (((uint64_t) ntohl((x) >> 32)) | (((uint64_t) ntohl((uint32_t) ((x) & 0xFFFFFFFF))) << 32))
 
 void print_hex(FILE * /* outstream */, uint8_t * /* data */, uint32_t /* len */);
 void convert_hex(char * /* str */, uint8_t * /* bytes */,
