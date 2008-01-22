@@ -48,6 +48,8 @@
 HMAC_CTX hmacsha1_ctx;
 AES_KEY aes_decrypt_key;
 
+static int CHUNK_SIZE = DEFAULT_CHUNK_SIZE;
+
 /**
  * Compute IV of current block as
  * truncate128(HMAC-SHA1(hmacsha1key||blockno))
@@ -235,13 +237,13 @@ int main(int argc, char *argv[])
   char inFile[512] = "";
   char outFile[512] = "";
   char passphrase[512];
-  int iflag = 0, oflag = 0, pflag = 0;
+  int kflag = 0, iflag = 0, oflag = 0, pflag = 0;
   int verbose = 0;
   extern char *optarg;
   extern int optind, optopt;
 
   optError = 0;
-  while((c = getopt(argc, argv, "hvi::o::p::")) != -1){
+  while((c = getopt(argc, argv, "hvi::o::p::k::")) != -1){
     switch(c) {
     case 'h':      
       usage("Help is on the way. Stay calm.");
@@ -266,6 +268,12 @@ int main(int argc, char *argv[])
 	strncpy(passphrase, optarg, sizeof(passphrase)-1);
       }
       pflag = 1;
+      break;
+    case 'k':
+      if (optarg) {
+	strncpy(passphrase, optarg, sizeof(passphrase)-1);
+      }
+      kflag = 1;
       break;
     case '?':
       fprintf(stderr, "Unknown option: -%c\n", optopt);
@@ -297,9 +305,14 @@ int main(int argc, char *argv[])
     }
   }
 
-  /* Obviously change this if we implement brute force methods inside fvdecrypt */
-  if (strlen(passphrase) == 0) {
-    fprintf(stderr, "No Passphrase given.\n");
+  /* Obviously change this if we implement brute force methods inside vfdecrypt */
+  if (!kflag && !pflag) {
+    fprintf(stderr, "Neither a passphrase nor valid keys were given.\n");
+    exit(1);
+  }
+
+  if (kflag && strlen(passphrase) != ((20+16)*2)) {
+    fprintf(stderr, "Invalid length of concatenated (AES, HMAC-SHA1) keys.\n");
     exit(1);
   }
 
@@ -320,17 +333,23 @@ int main(int argc, char *argv[])
       fprintf(stderr, "header corrupted?\n"), exit(1);
     }
     adjust_v1_header_byteorder(&v1header);
-    unwrap_v1_header(passphrase, &v1header, aes_key, hmacsha1_key);
+    if(!kflag) unwrap_v1_header(passphrase, &v1header, aes_key, hmacsha1_key);
   }
   
-  if (hdr_version == 2) {
+  if (hdr_version == 2 && !kflag) {
     fseek(in, 0L, SEEK_SET);
     if (fread(&v2header, sizeof(cencrypted_v2_pwheader), 1, in) < 1) {
       fprintf(stderr, "header corrupted?\n"), exit(1);
     }
     adjust_v2_header_byteorder(&v2header);
     dump_v2_header(&v2header);
-    unwrap_v2_header(passphrase, &v2header, aes_key, hmacsha1_key);
+    if(!kflag) unwrap_v2_header(passphrase, &v2header, aes_key, hmacsha1_key);
+    CHUNK_SIZE = v2header.blocksize;
+  }
+
+  if (kflag) {
+    convert_hex(passphrase, aes_key, 16);
+    convert_hex(passphrase+32, hmacsha1_key, 20);
   }
   
   HMAC_CTX_init(&hmacsha1_ctx);
