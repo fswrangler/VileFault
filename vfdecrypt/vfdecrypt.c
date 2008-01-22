@@ -361,9 +361,11 @@ int main(int argc, char *argv[])
   AES_set_decrypt_key(aes_key, CIPHER_KEY_LENGTH * 8, &aes_decrypt_key);
 
   if (verbose >= 1) {
+    printf("aeskey: ");
     print_hex(aes_key, 16);
   }
   if (verbose >= 1) {
+    printf("hmacsha1key: ");
     print_hex(hmacsha1_key, 20);
   }
   if (hdr_version == 2) {
