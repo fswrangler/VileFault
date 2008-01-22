@@ -168,7 +168,7 @@ int unwrap_v2_header(char *passphrase, cencrypted_v2_pwheader *header, uint8_t *
   PKCS5_PBKDF2_HMAC_SHA1(passphrase, strlen(passphrase), (unsigned char*)header->kdf_salt, 20,
 			 PBKDF2_ITERATION_COUNT, sizeof(derived_key), derived_key);
 
-  print_hex(derived_key, 192/8);
+  print_hex(stderr, derived_key, 192/8);
 
   EVP_CIPHER_CTX_init(&ctx);
   /* result of the decryption operation shouldn't be bigger than ciphertext */
@@ -336,13 +336,15 @@ int main(int argc, char *argv[])
     if(!kflag) unwrap_v1_header(passphrase, &v1header, aes_key, hmacsha1_key);
   }
   
-  if (hdr_version == 2 && !kflag) {
+  if (hdr_version == 2) {
     fseek(in, 0L, SEEK_SET);
     if (fread(&v2header, sizeof(cencrypted_v2_pwheader), 1, in) < 1) {
       fprintf(stderr, "header corrupted?\n"), exit(1);
     }
     adjust_v2_header_byteorder(&v2header);
-    dump_v2_header(&v2header);
+    if (verbose >= 1) {
+      dump_v2_header(&v2header);
+    }
     if(!kflag) unwrap_v2_header(passphrase, &v2header, aes_key, hmacsha1_key);
     CHUNK_SIZE = v2header.blocksize;
   }
@@ -357,15 +359,19 @@ int main(int argc, char *argv[])
   AES_set_decrypt_key(aes_key, CIPHER_KEY_LENGTH * 8, &aes_decrypt_key);
 
   if (verbose >= 1) {
-    printf("aeskey: ");
-    print_hex(aes_key, 16);
+    fprintf(stderr, "aeskey:\n");
+    print_hex(stderr, aes_key, 16);
   }
   if (verbose >= 1) {
-    printf("hmacsha1key: ");
-    print_hex(hmacsha1_key, 20);
+    fprintf(stderr, "hmacsha1key:\n");
+    print_hex(stderr, hmacsha1_key, 20);
   }
   if (hdr_version == 2) {
-    fseek(in, 4096L, SEEK_SET);
+    if (verbose >= 1) {
+      fprintf(stderr, "data offset : %lu\n", v2header.dataoffset);
+      fprintf(stderr, "data size   : %lu\n", v2header.datasize);
+    }
+    fseek(in, v2header.dataoffset, SEEK_SET);
   } else  {
     fseek(in, 0L, SEEK_SET);
   }
@@ -374,6 +380,11 @@ int main(int argc, char *argv[])
   while(fread(inbuf, CHUNK_SIZE, 1, in) > 0) {
     decrypt_chunk(inbuf, outbuf, chunk_no);
     chunk_no++;
+    // fix for last chunk
+    if(hdr_version == 2 && (v2header.datasize-ftell(out)) < CHUNK_SIZE) {
+      fwrite(outbuf, v2header.datasize - ftell(out), 1, out);
+      break;
+    }
     fwrite(outbuf, CHUNK_SIZE, 1, out);
   }
   if (verbose >= 1) {

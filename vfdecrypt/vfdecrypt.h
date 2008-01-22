@@ -1,6 +1,6 @@
-#ifndef _FVDECRYPT_H
+#ifndef _VFDECRYPT_H
 
-#define _FVDECRYPT_H		1
+#define _VFDECRYPT_H		1
 
 /* length of message digest output in bytes (160 bits) */
 #define MD_LENGTH		20
@@ -131,4 +131,4 @@ aHeader.encryptedBlob
 aHeader.publicKeyHashSize           %ld
 aHeader.publicKeyHash
 */
-#endif
+#endif /* _VFDECRYPT_H */

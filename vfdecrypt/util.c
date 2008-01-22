@@ -6,7 +6,7 @@
 
 #include "util.h"
 
-void print_hex(uint8_t *data, uint32_t len)
+void print_hex(FILE *outstream, uint8_t *data, uint32_t len)
 {
   uint32_t ctr;
   char *sep;
@@ -17,9 +17,9 @@ void print_hex(uint8_t *data, uint32_t len)
 
   for(ctr = 0; ctr < len; ctr++) {
     sep = (((ctr&7)==0)&&ctr) ? "\n" : "";
-    fprintf(stderr, "%s%02x ", sep, data[ctr]);
+    fprintf(outstream, "%s%02x ", sep, data[ctr]);
   }
-  fprintf(stderr, "\n\n");
+  fprintf(outstream, "\n\n");
 }
 
 void convert_hex(char *str, uint8_t *bytes, int maxlen)
@@ -46,10 +46,10 @@ void dump_v2_header(void *hdr)
   fprintf(stderr, "keyDerivationIterationCount %lu\n", (unsigned long) pwhdr->kdf_iteration_count);
   fprintf(stderr, "keyDerivationSaltSize       %lu\n", (unsigned long) pwhdr->kdf_salt_len);
   fprintf(stderr, "keyDerivationSalt           \n");
-  print_hex(pwhdr->kdf_salt, pwhdr->kdf_salt_len);
+  print_hex(stderr, pwhdr->kdf_salt, pwhdr->kdf_salt_len);
   fprintf(stderr, "blobEncryptionIVSize        %lu\n", (unsigned long) pwhdr->blob_enc_iv_size);
   fprintf(stderr, "blobEncryptionIV            \n");
-  print_hex(pwhdr->blob_enc_iv, pwhdr->blob_enc_iv_size);
+  print_hex(stderr, pwhdr->blob_enc_iv, pwhdr->blob_enc_iv_size);
   fprintf(stderr, "blobEncryptionKeySizeInBits %lu\n",  (unsigned long) pwhdr->blob_enc_key_bits);
   /*  17: CSSM_ALGID_3DES_3KEY_EDE */
   fprintf(stderr, "blobEncryptionAlgorithm     %lu\n",  (unsigned long) pwhdr->blob_enc_algorithm);
@@ -59,7 +59,7 @@ void dump_v2_header(void *hdr)
   fprintf(stderr, "blobEncryptionMode          %lu\n",  (unsigned long)  pwhdr->blob_enc_mode);
   fprintf(stderr, "encryptedBlobSize           %lu\n",  (unsigned long)  pwhdr->encrypted_keyblob_size);
   fprintf(stderr, "encryptedBlob               \n");
-  print_hex(pwhdr->encrypted_keyblob, pwhdr->encrypted_keyblob_size);
+  print_hex(stderr, pwhdr->encrypted_keyblob, pwhdr->encrypted_keyblob_size);
 }
 
 void adjust_v1_header_byteorder(cencrypted_v1_header *hdr) {
@@ -71,6 +71,9 @@ void adjust_v1_header_byteorder(cencrypted_v1_header *hdr) {
 }
 
 void adjust_v2_header_byteorder(cencrypted_v2_pwheader *pwhdr) {
+  pwhdr->blocksize = htonl(pwhdr->blocksize);
+  swap64(pwhdr->datasize);
+  swap64(pwhdr->dataoffset);
   pwhdr->kdf_algorithm = htonl(pwhdr->kdf_algorithm);
   pwhdr->kdf_prng_algorithm = htonl(pwhdr->kdf_prng_algorithm);
   pwhdr->kdf_iteration_count = htonl(pwhdr->kdf_iteration_count);
