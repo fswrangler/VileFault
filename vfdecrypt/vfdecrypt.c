@@ -329,9 +329,26 @@ int main(int argc, char *argv[])
     exit(1);
   }
 
-  if (kflag && strlen(passphrase) != ((20+16)*2)) {
+  if (kflag && (sizeof(aes_key) != 16)) {
+    fprintf(stderr, "Invalid length of AES key.\n");
+    fprintf(stderr, "sizeof(aes_key) says: %i.\n", sizeof(aes_key));
+    exit(1);
+  }
+
+  if ((mflag && sizeof(hmacsha1_key) != (20*2)) && nflag == 0) {
+    fprintf(stderr, "Invalid length of HMAC-SHA1.\n");
+    fprintf(stderr, "sizeof(hmacsha1_key) says: %i.\n", sizeof(hmacsha1_key));
+    exit(1);
+  }
+
+  if ((kflag && strlen(passphrase) != ((20+16)*2)) && mflag == 0 || nflag == 0) {
     fprintf(stderr, "Invalid length of concatenated (AES, HMAC-SHA1) keys.\n");
     exit(1);
+  }
+
+  if (nflag) {
+     fprintf(stderr, "Setting NULL HMAC-SHA1. This will clobber any other HMAC-SHA1 value set.\n");
+     memset(hmacsha1_key, 0, 20);
   }
 
   hdr_version = determine_header_version(in);
