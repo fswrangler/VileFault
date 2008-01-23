@@ -1,5 +1,5 @@
 CC	=	gcc
-CFLAGS	=	-O2
+CFLAGS	=	-O2 -Wall
 LDFLAGS	=	-lcrypto
 
 OBJS	=	vfdecrypt.o util.o

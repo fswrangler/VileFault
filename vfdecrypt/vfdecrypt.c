@@ -225,10 +225,10 @@ int main(int argc, char *argv[])
   FILE *in, *out;
   cencrypted_v1_header v1header;
   cencrypted_v2_pwheader v2header;
+  char hmacsha1_key_str[20*2+1];
+  char aes_key_str[16*2+1];
   uint8_t hmacsha1_key[20];
-  uint8_t tmp_hmacsha1_key[20];
   uint8_t aes_key[16];
-  uint8_t tmp_aes_key[16];
   uint8_t inbuf[CHUNK_SIZE], outbuf[CHUNK_SIZE];
   uint32_t chunk_no;
   int hdr_version;
@@ -239,13 +239,16 @@ int main(int argc, char *argv[])
   char inFile[512] = "";
   char outFile[512] = "";
   char passphrase[512];
-  int kflag = 0, iflag = 0, oflag = 0, pflag = 0, mflag = 0, nflag = 0;
+  int kflag = 0, iflag = 0, oflag = 0, pflag = 0, mflag = 0;
   int verbose = 0;
   extern char *optarg;
   extern int optind, optopt;
 
+  memset(hmacsha1_key_str, '0', sizeof(hmacsha1_key_str)-1);
+  hmacsha1_key_str[sizeof(hmacsha1_key_str)-1] = '\0';
+
   optError = 0;
-  while((c = getopt(argc, argv, "hvin::o::p::k::m::")) != -1){
+  while((c = getopt(argc, argv, "hvi:o::p::k::m::")) != -1){
     switch(c) {
     case 'h':      
       usage("Help is on the way. Stay calm.");
@@ -273,25 +276,35 @@ int main(int argc, char *argv[])
       break;
     case 'k':
       if (optarg) {
-        /* remove this next line*/
-	strncpy(passphrase, optarg, sizeof(passphrase)-1);
-	strncpy(tmp_aes_key, optarg, sizeof(tmp_aes_key)-1);
-	convert_hex(tmp_aes_key, aes_key, 16);
+	if (strlen(optarg) == 2*(16+20)) {
+	  strncpy(aes_key_str, optarg, sizeof(aes_key_str));
+	  aes_key_str[sizeof(aes_key_str)-1] = '\0';
+	  strncpy(hmacsha1_key_str, optarg+(2*16), sizeof(hmacsha1_key_str));
+	  hmacsha1_key_str[sizeof(hmacsha1_key_str)-1] = '\0';
+	  mflag = 1;
+	} else if(strlen(optarg) == 2*16) {
+	  strncpy(aes_key_str, optarg, sizeof(aes_key_str));
+	  aes_key_str[sizeof(aes_key_str)-1] = '\0';
+	} else {
+	  usage("you should either specify a aeskey||hmacsha1key or simply aeskey");
+	  optError++;
+	}
       }
       kflag = 1;
       break;
     case 'm':
-      if (optarg) {
-        /* We may want to warn a user if their hmac is too small and error out */
-        strncpy(tmp_hmacsha1_key, optarg, sizeof(hmacsha1_key)-1);
-	convert_hex(tmp_hmacsha1_key, hmacsha1_key, 20);
+      if (mflag) {
+	usage("hmacsha1 key has already been specified!");
+	optError++;
+      }
+      if (optarg && strlen(optarg) == 2*20) {
+	strncpy(hmacsha1_key_str+(2*16), optarg, sizeof(hmacsha1_key_str));
+	hmacsha1_key_str[sizeof(hmacsha1_key_str)-1] = '\0';
       } else {
-        usage("Perhaps you'd like to give us 40 hex bytes of SHA-1 HMAC?");
+        usage("Perhaps you'd like to give us 40 hex bytes of the HMACSHA1 key?");
+	optError++;
       }
       mflag = 1;
-      break;
-    case 'n':
-      nflag = 1;
       break;
     case '?':
       fprintf(stderr, "Unknown option: -%c\n", optopt);
@@ -329,26 +342,8 @@ int main(int argc, char *argv[])
     exit(1);
   }
 
-  if (kflag && (sizeof(aes_key) != 16)) {
-    fprintf(stderr, "Invalid length of AES key.\n");
-    fprintf(stderr, "sizeof(aes_key) says: %i.\n", sizeof(aes_key));
-    exit(1);
-  }
-
-  if ((mflag && sizeof(hmacsha1_key) != (20*2)) && nflag == 0) {
-    fprintf(stderr, "Invalid length of HMAC-SHA1.\n");
-    fprintf(stderr, "sizeof(hmacsha1_key) says: %i.\n", sizeof(hmacsha1_key));
-    exit(1);
-  }
-
-  if ((kflag && strlen(passphrase) != ((20+16)*2)) && mflag == 0 || nflag == 0) {
-    fprintf(stderr, "Invalid length of concatenated (AES, HMAC-SHA1) keys.\n");
-    exit(1);
-  }
-
-  if (nflag) {
-     fprintf(stderr, "Setting NULL HMAC-SHA1. This will clobber any other HMAC-SHA1 value set.\n");
-     memset(hmacsha1_key, 0, 20);
+  if (kflag && !mflag) {
+    fprintf(stderr, "Setting HMAC-SHA1 key to all zeros!\n");
   }
 
   hdr_version = determine_header_version(in);
@@ -385,8 +380,8 @@ int main(int argc, char *argv[])
   }
 
   if (kflag) {
-    convert_hex(passphrase, aes_key, 16);
-    convert_hex(passphrase+32, hmacsha1_key, 20);
+    convert_hex(aes_key_str, aes_key, 16);
+    convert_hex(hmacsha1_key_str, hmacsha1_key, 20);
   }
   
   HMAC_CTX_init(&hmacsha1_ctx);
@@ -403,8 +398,8 @@ int main(int argc, char *argv[])
   }
   if (hdr_version == 2) {
     if (verbose >= 1) {
-      fprintf(stderr, "data offset : %lu\n", v2header.dataoffset);
-      fprintf(stderr, "data size   : %lu\n", v2header.datasize);
+      fprintf(stderr, "data offset : %llu\n", v2header.dataoffset);
+      fprintf(stderr, "data size   : %llu\n", v2header.datasize);
     }
     fseek(in, v2header.dataoffset, SEEK_SET);
   } else  {
