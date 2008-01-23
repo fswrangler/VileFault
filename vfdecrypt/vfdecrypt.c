@@ -216,7 +216,7 @@ int determine_header_version(FILE *dmg)
 int usage(char *message)
 {
   fprintf(stderr, "%s\n", message);
-  fprintf(stderr, "Usage: vfdecrypt -i in-file [-p password | -k aeskey||hmacsha1key] -o out-file\n");
+  fprintf(stderr, "Usage: vfdecrypt -i in-file [-p password | -k aeskey [-m hmacsha1key | -n ]] -o out-file\n");
   exit(1);
 }
 
@@ -226,7 +226,9 @@ int main(int argc, char *argv[])
   cencrypted_v1_header v1header;
   cencrypted_v2_pwheader v2header;
   uint8_t hmacsha1_key[20];
+  uint8_t tmp_hmacsha1_key[20];
   uint8_t aes_key[16];
+  uint8_t tmp_aes_key[16];
   uint8_t inbuf[CHUNK_SIZE], outbuf[CHUNK_SIZE];
   uint32_t chunk_no;
   int hdr_version;
@@ -237,13 +239,13 @@ int main(int argc, char *argv[])
   char inFile[512] = "";
   char outFile[512] = "";
   char passphrase[512];
-  int kflag = 0, iflag = 0, oflag = 0, pflag = 0;
+  int kflag = 0, iflag = 0, oflag = 0, pflag = 0, mflag = 0, nflag = 0;
   int verbose = 0;
   extern char *optarg;
   extern int optind, optopt;
 
   optError = 0;
-  while((c = getopt(argc, argv, "hvi::o::p::k::")) != -1){
+  while((c = getopt(argc, argv, "hvin::o::p::k::m::")) != -1){
     switch(c) {
     case 'h':      
       usage("Help is on the way. Stay calm.");
@@ -271,9 +273,25 @@ int main(int argc, char *argv[])
       break;
     case 'k':
       if (optarg) {
+        /* remove this next line*/
 	strncpy(passphrase, optarg, sizeof(passphrase)-1);
+	strncpy(tmp_aes_key, optarg, sizeof(tmp_aes_key)-1);
+	convert_hex(tmp_aes_key, aes_key, 16);
       }
       kflag = 1;
+      break;
+    case 'm':
+      if (optarg) {
+        /* We may want to warn a user if their hmac is too small and error out */
+        strncpy(tmp_hmacsha1_key, optarg, sizeof(hmacsha1_key)-1);
+	convert_hex(tmp_hmacsha1_key, hmacsha1_key, 20);
+      } else {
+        usage("Perhaps you'd like to give us 40 hex bytes of SHA-1 HMAC?");
+      }
+      mflag = 1;
+      break;
+    case 'n':
+      nflag = 1;
       break;
     case '?':
       fprintf(stderr, "Unknown option: -%c\n", optopt);
@@ -307,7 +325,7 @@ int main(int argc, char *argv[])
 
   /* Obviously change this if we implement brute force methods inside vfdecrypt */
   if (!kflag && !pflag) {
-    fprintf(stderr, "Neither a passphrase nor valid keys were given.\n");
+    fprintf(stderr, "Neither a passphrase nor a valid key/hmac combo were given.\n");
     exit(1);
   }
 
