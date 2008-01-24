@@ -298,7 +298,7 @@ int main(int argc, char *argv[])
 	optError++;
       }
       if (optarg && strlen(optarg) == 2*20) {
-	strncpy(hmacsha1_key_str+(2*16), optarg, sizeof(hmacsha1_key_str));
+	strncpy(hmacsha1_key_str, optarg, sizeof(hmacsha1_key_str));
 	hmacsha1_key_str[sizeof(hmacsha1_key_str)-1] = '\0';
       } else {
         usage("Perhaps you'd like to give us 40 hex bytes of the HMACSHA1 key?");
