@@ -248,7 +248,7 @@ int main(int argc, char *argv[])
   hmacsha1_key_str[sizeof(hmacsha1_key_str)-1] = '\0';
 
   optError = 0;
-  while((c = getopt(argc, argv, "hvi:o::p::k::m::")) != -1){
+  while((c = getopt(argc, argv, "hvi:o::p::k:m:")) != -1){
     switch(c) {
     case 'h':      
       usage("Help is on the way. Stay calm.");
