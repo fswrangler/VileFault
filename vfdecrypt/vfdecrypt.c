@@ -216,7 +216,7 @@ int determine_header_version(FILE *dmg)
 int usage(char *message)
 {
   fprintf(stderr, "%s\n", message);
-  fprintf(stderr, "Usage: vfdecrypt -i in-file [-p password | -k aeskey [-m hmacsha1key | -n ]] -o out-file\n");
+  fprintf(stderr, "Usage: vfdecrypt -i in-file [-p password | -k aeskey [-m hmacsha1key]] -o out-file\n");
   exit(1);
 }
 
