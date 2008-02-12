@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 
+ * Copyright (c) 2006, 2007, 2008
  * Ralf-Philipp Weinmann <ralf@coderpunks.org>
  * Jacob Appelbaum <jacob@appelbaum.net>
  * Christian Fromme <kaner@strace.org>
