@@ -35,8 +35,8 @@
 #define NOCACHED 0
 
 typedef struct {
-  unsigned char k_ipad[65];
-  unsigned char k_opad[65];
+  unsigned char k_ipad[sizeof(SHA_CTX)];
+  unsigned char k_opad[sizeof(SHA_CTX)];
   unsigned char k_ipad_set;
   unsigned char k_opad_set;
 } SHA1_CACHE;
