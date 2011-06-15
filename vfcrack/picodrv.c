@@ -80,7 +80,7 @@ int picoread(unsigned long off, void *buf_, unsigned long len)
   picoopen();
   picosetoff(off);
   i = read(fdm, buf, len);
-  return i;
+  return (int) i;
 }
 
 int picowrite(unsigned long off, void *buf_, unsigned long len)
@@ -91,5 +91,5 @@ int picowrite(unsigned long off, void *buf_, unsigned long len)
   picoopen();
   picosetoff(off);
   i = write(fdm, buf, len);
-  return i;
+  return (int) i;
 }

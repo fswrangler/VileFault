@@ -72,7 +72,7 @@ void print_hex(uint8_t *data, uint32_t len)
 
 void convert_hex(char *str, uint8_t *bytes, int maxlen)
 {
-  int slen = strlen(str);
+  int slen = (int) strlen(str);
   int bytelen = (slen+1)/2;
   int rpos, wpos = 0;
 
@@ -265,13 +265,13 @@ pbkdf2_sha1_f(unsigned char *passphrase, size_t passphrase_len,
 
   memset(&cached, 0, sizeof(cached));
 
-  hmac_sha1_vector(passphrase, passphrase_len, 2, addr, len, tmp, USECACHED);
+  hmac_sha1_vector(passphrase, (unsigned int) passphrase_len, 2, addr, len, tmp, USECACHED);
   memcpy(digest, tmp, SHA_DIGEST_LENGTH);
   if(usefpga)
     addreg(&cached, digest, (char *)passphrase);
   else {
     for(i = 1; i < iterations; i++) {
-      hmac_sha1_vector(passphrase, passphrase_len, 1, addr2, len2, tmp2, USECACHED);
+      hmac_sha1_vector(passphrase, (unsigned int) passphrase_len, 1, addr2, len2, tmp2, USECACHED);
       memcpy(tmp, tmp2, SHA_DIGEST_LENGTH);
       for(j = 0; j < SHA_DIGEST_LENGTH; j++)
         digest[j] ^= tmp2[j];

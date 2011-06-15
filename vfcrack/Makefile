@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang
 CFLAGS = -Wall -O2 -funroll-loops
 TARGET = vfcrack
 LDFLAGS = -lssl -lcrypto

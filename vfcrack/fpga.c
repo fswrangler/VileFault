@@ -181,7 +181,7 @@ addreg(SHA1_CACHE *cache, unsigned char *digest, char *passphrase)
 
 	ictx = (SHA_CTX *)cache->k_ipad;
 	octx = (SHA_CTX *)cache->k_opad;
-	swapbytes(mac, digest, 20);
+	swapbytes((unsigned char *) mac, digest, 20);
 
 	fpga_idx = findreg(fpga_idx);
 	if(fpga_idx == -1) {

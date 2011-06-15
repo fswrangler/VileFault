@@ -1,0 +1,326 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		96531ADC13A8AD5E00FC6ED1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531ADB13A8AD5E00FC6ED1 /* main.c */; };
+		96531ADE13A8AD5F00FC6ED1 /* vfcrack.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96531ADD13A8AD5F00FC6ED1 /* vfcrack.1 */; };
+		96531AEA13A8AD6A00FC6ED1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531AE913A8AD6A00FC6ED1 /* main.c */; };
+		96531AEC13A8AD6A00FC6ED1 /* vfdecrypt.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96531AEB13A8AD6A00FC6ED1 /* vfdecrypt.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		96531AD613A8AD5E00FC6ED1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				96531ADE13A8AD5F00FC6ED1 /* vfcrack.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		96531AE413A8AD6A00FC6ED1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				96531AEC13A8AD6A00FC6ED1 /* vfdecrypt.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		96531AD813A8AD5E00FC6ED1 /* vfcrack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vfcrack; sourceTree = BUILT_PRODUCTS_DIR; };
+		96531ADB13A8AD5E00FC6ED1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		96531ADD13A8AD5F00FC6ED1 /* vfcrack.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vfcrack.1; sourceTree = "<group>"; };
+		96531AE613A8AD6A00FC6ED1 /* vfdecrypt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vfdecrypt; sourceTree = BUILT_PRODUCTS_DIR; };
+		96531AE913A8AD6A00FC6ED1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		96531AEB13A8AD6A00FC6ED1 /* vfdecrypt.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vfdecrypt.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		96531AD513A8AD5E00FC6ED1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96531AE313A8AD6A00FC6ED1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		96531AC913A8AC2B00FC6ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96531AD813A8AD5E00FC6ED1 /* vfcrack */,
+				96531AE613A8AD6A00FC6ED1 /* vfdecrypt */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96531ADA13A8AD5E00FC6ED1 /* vfcrack */ = {
+			isa = PBXGroup;
+			children = (
+				96531ADB13A8AD5E00FC6ED1 /* main.c */,
+				96531ADD13A8AD5F00FC6ED1 /* vfcrack.1 */,
+			);
+			path = vfcrack;
+			sourceTree = "<group>";
+		};
+		96531AE813A8AD6A00FC6ED1 /* vfdecrypt */ = {
+			isa = PBXGroup;
+			children = (
+				96531AE913A8AD6A00FC6ED1 /* main.c */,
+				96531AEB13A8AD6A00FC6ED1 /* vfdecrypt.1 */,
+			);
+			path = vfdecrypt;
+			sourceTree = "<group>";
+		};
+		9677138113A8AAFE00C34471 = {
+			isa = PBXGroup;
+			children = (
+				96531ADA13A8AD5E00FC6ED1 /* vfcrack */,
+				96531AE813A8AD6A00FC6ED1 /* vfdecrypt */,
+				96531AC913A8AC2B00FC6ED1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		96531AD713A8AD5E00FC6ED1 /* vfcrack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96531ADF13A8AD5F00FC6ED1 /* Build configuration list for PBXNativeTarget "vfcrack" */;
+			buildPhases = (
+				96531AD413A8AD5E00FC6ED1 /* Sources */,
+				96531AD513A8AD5E00FC6ED1 /* Frameworks */,
+				96531AD613A8AD5E00FC6ED1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vfcrack;
+			productName = vfcrack;
+			productReference = 96531AD813A8AD5E00FC6ED1 /* vfcrack */;
+			productType = "com.apple.product-type.tool";
+		};
+		96531AE513A8AD6A00FC6ED1 /* vfdecrypt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96531AED13A8AD6A00FC6ED1 /* Build configuration list for PBXNativeTarget "vfdecrypt" */;
+			buildPhases = (
+				96531AE213A8AD6A00FC6ED1 /* Sources */,
+				96531AE313A8AD6A00FC6ED1 /* Frameworks */,
+				96531AE413A8AD6A00FC6ED1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vfdecrypt;
+			productName = vfdecrypt;
+			productReference = 96531AE613A8AD6A00FC6ED1 /* vfdecrypt */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9677138313A8AAFE00C34471 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Booz Allen Hamilton";
+			};
+			buildConfigurationList = 9677138613A8AAFE00C34471 /* Build configuration list for PBXProject "vilefault" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9677138113A8AAFE00C34471;
+			productRefGroup = 96531AC913A8AC2B00FC6ED1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				96531AD713A8AD5E00FC6ED1 /* vfcrack */,
+				96531AE513A8AD6A00FC6ED1 /* vfdecrypt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		96531AD413A8AD5E00FC6ED1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96531ADC13A8AD5E00FC6ED1 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96531AE213A8AD6A00FC6ED1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96531AEA13A8AD6A00FC6ED1 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		96531AE013A8AD5F00FC6ED1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		96531AE113A8AD5F00FC6ED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		96531AEE13A8AD6A00FC6ED1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		96531AEF13A8AD6A00FC6ED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9677138813A8AAFE00C34471 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		9677138913A8AAFE00C34471 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		96531ADF13A8AD5F00FC6ED1 /* Build configuration list for PBXNativeTarget "vfcrack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96531AE013A8AD5F00FC6ED1 /* Debug */,
+				96531AE113A8AD5F00FC6ED1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		96531AED13A8AD6A00FC6ED1 /* Build configuration list for PBXNativeTarget "vfdecrypt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96531AEE13A8AD6A00FC6ED1 /* Debug */,
+				96531AEF13A8AD6A00FC6ED1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9677138613A8AAFE00C34471 /* Build configuration list for PBXProject "vilefault" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9677138813A8AAFE00C34471 /* Debug */,
+				9677138913A8AAFE00C34471 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9677138313A8AAFE00C34471 /* Project object */;
+}
