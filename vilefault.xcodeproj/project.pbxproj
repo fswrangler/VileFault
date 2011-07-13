@@ -7,17 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96531ADC13A8AD5E00FC6ED1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531ADB13A8AD5E00FC6ED1 /* main.c */; };
 		96531ADE13A8AD5F00FC6ED1 /* vfcrack.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96531ADD13A8AD5F00FC6ED1 /* vfcrack.1 */; };
-		96531AEA13A8AD6A00FC6ED1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531AE913A8AD6A00FC6ED1 /* main.c */; };
 		96531AEC13A8AD6A00FC6ED1 /* vfdecrypt.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96531AEB13A8AD6A00FC6ED1 /* vfdecrypt.1 */; };
+		96531AFA13A8AFA700FC6ED1 /* fpga.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531AF213A8AFA700FC6ED1 /* fpga.c */; };
+		96531AFC13A8AFA700FC6ED1 /* picodrv.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531AF513A8AFA700FC6ED1 /* picodrv.c */; };
+		96531AFD13A8AFA700FC6ED1 /* vfcrack.c in Sources */ = {isa = PBXBuildFile; fileRef = 96531AF913A8AFA700FC6ED1 /* vfcrack.c */; };
+		96531AFF13A8B23600FC6ED1 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 96531AFE13A8B23600FC6ED1 /* libssl.dylib */; };
+		96531B0113A8B24300FC6ED1 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 96531B0013A8B24300FC6ED1 /* libcrypto.dylib */; };
+		9679737C13CD9E7A00D00352 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 9679737713CD9E7A00D00352 /* util.c */; };
+		9679737D13CD9E7A00D00352 /* vfdecrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 9679737913CD9E7A00D00352 /* vfdecrypt.c */; };
+		9679738013CD9FA400D00352 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9679737F13CD9FA400D00352 /* libcrypto.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		96531AD613A8AD5E00FC6ED1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/local/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
 				96531ADE13A8AD5F00FC6ED1 /* vfcrack.1 in CopyFiles */,
@@ -38,11 +44,30 @@
 
 /* Begin PBXFileReference section */
 		96531AD813A8AD5E00FC6ED1 /* vfcrack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vfcrack; sourceTree = BUILT_PRODUCTS_DIR; };
-		96531ADB13A8AD5E00FC6ED1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		96531ADD13A8AD5F00FC6ED1 /* vfcrack.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vfcrack.1; sourceTree = "<group>"; };
 		96531AE613A8AD6A00FC6ED1 /* vfdecrypt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vfdecrypt; sourceTree = BUILT_PRODUCTS_DIR; };
-		96531AE913A8AD6A00FC6ED1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		96531AEB13A8AD6A00FC6ED1 /* vfdecrypt.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vfdecrypt.1; sourceTree = "<group>"; };
+		96531AF013A8AFA700FC6ED1 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		96531AF113A8AFA700FC6ED1 /* dict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dict; sourceTree = "<group>"; };
+		96531AF213A8AFA700FC6ED1 /* fpga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fpga.c; sourceTree = "<group>"; };
+		96531AF313A8AFA700FC6ED1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		96531AF413A8AFA700FC6ED1 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		96531AF513A8AFA700FC6ED1 /* picodrv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = picodrv.c; sourceTree = "<group>"; };
+		96531AF613A8AFA700FC6ED1 /* picodrv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picodrv.h; sourceTree = "<group>"; };
+		96531AF713A8AFA700FC6ED1 /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		96531AF813A8AFA700FC6ED1 /* swap2vf.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = swap2vf.sh; sourceTree = "<group>"; };
+		96531AF913A8AFA700FC6ED1 /* vfcrack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vfcrack.c; sourceTree = "<group>"; };
+		96531AFE13A8B23600FC6ED1 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /usr/lib/libssl.dylib; sourceTree = "<absolute>"; };
+		96531B0013A8B24300FC6ED1 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /usr/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
+		9679737313CD9E7A00D00352 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		9679737413CD9E7A00D00352 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		9679737513CD9E7A00D00352 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		9679737613CD9E7A00D00352 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		9679737713CD9E7A00D00352 /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		9679737813CD9E7A00D00352 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		9679737913CD9E7A00D00352 /* vfdecrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vfdecrypt.c; sourceTree = "<group>"; };
+		9679737A13CD9E7A00D00352 /* vfdecrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vfdecrypt.h; sourceTree = "<group>"; };
+		9679737F13CD9FA400D00352 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = SDKs/MacOSX10.7.sdk/usr/lib/libcrypto.dylib; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96531B0113A8B24300FC6ED1 /* libcrypto.dylib in Frameworks */,
+				96531AFF13A8B23600FC6ED1 /* libssl.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9679738013CD9FA400D00352 /* libcrypto.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,8 +103,17 @@
 		96531ADA13A8AD5E00FC6ED1 /* vfcrack */ = {
 			isa = PBXGroup;
 			children = (
-				96531ADB13A8AD5E00FC6ED1 /* main.c */,
+				96531AF013A8AFA700FC6ED1 /* common.h */,
+				96531AF713A8AFA700FC6ED1 /* sha1.h */,
+				96531AF913A8AFA700FC6ED1 /* vfcrack.c */,
+				96531AF613A8AFA700FC6ED1 /* picodrv.h */,
+				96531AF513A8AFA700FC6ED1 /* picodrv.c */,
+				96531AF213A8AFA700FC6ED1 /* fpga.c */,
+				96531AF113A8AFA700FC6ED1 /* dict */,
+				96531AF813A8AFA700FC6ED1 /* swap2vf.sh */,
 				96531ADD13A8AD5F00FC6ED1 /* vfcrack.1 */,
+				96531AF413A8AFA700FC6ED1 /* Makefile */,
+				96531AF313A8AFA700FC6ED1 /* LICENSE */,
 			);
 			path = vfcrack;
 			sourceTree = "<group>";
@@ -84,17 +121,35 @@
 		96531AE813A8AD6A00FC6ED1 /* vfdecrypt */ = {
 			isa = PBXGroup;
 			children = (
-				96531AE913A8AD6A00FC6ED1 /* main.c */,
+				9679737A13CD9E7A00D00352 /* vfdecrypt.h */,
+				9679737913CD9E7A00D00352 /* vfdecrypt.c */,
+				9679737813CD9E7A00D00352 /* util.h */,
+				9679737713CD9E7A00D00352 /* util.c */,
 				96531AEB13A8AD6A00FC6ED1 /* vfdecrypt.1 */,
+				9679737313CD9E7A00D00352 /* LICENSE */,
+				9679737413CD9E7A00D00352 /* Makefile */,
+				9679737513CD9E7A00D00352 /* README */,
+				9679737613CD9E7A00D00352 /* TODO */,
 			);
 			path = vfdecrypt;
+			sourceTree = "<group>";
+		};
+		96531B0213A8B25100FC6ED1 /* Libraries and Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96531B0013A8B24300FC6ED1 /* libcrypto.dylib */,
+				96531AFE13A8B23600FC6ED1 /* libssl.dylib */,
+			);
+			name = "Libraries and Frameworks";
 			sourceTree = "<group>";
 		};
 		9677138113A8AAFE00C34471 = {
 			isa = PBXGroup;
 			children = (
+				9679737F13CD9FA400D00352 /* libcrypto.dylib */,
 				96531ADA13A8AD5E00FC6ED1 /* vfcrack */,
 				96531AE813A8AD6A00FC6ED1 /* vfdecrypt */,
+				96531B0213A8B25100FC6ED1 /* Libraries and Frameworks */,
 				96531AC913A8AC2B00FC6ED1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -142,6 +197,7 @@
 		9677138313A8AAFE00C34471 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Booz Allen Hamilton";
 			};
 			buildConfigurationList = 9677138613A8AAFE00C34471 /* Build configuration list for PBXProject "vilefault" */;
@@ -167,7 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96531ADC13A8AD5E00FC6ED1 /* main.c in Sources */,
+				96531AFA13A8AFA700FC6ED1 /* fpga.c in Sources */,
+				96531AFC13A8AFA700FC6ED1 /* picodrv.c in Sources */,
+				96531AFD13A8AFA700FC6ED1 /* vfcrack.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96531AEA13A8AD6A00FC6ED1 /* main.c in Sources */,
+				9679737C13CD9E7A00D00352 /* util.c in Sources */,
+				9679737D13CD9E7A00D00352 /* vfdecrypt.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +245,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -200,13 +258,11 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-funroll-loops";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -214,7 +270,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -222,12 +277,10 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-funroll-loops";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -283,12 +336,18 @@
 		9677138813A8AAFE00C34471 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = Debug;
 		};
 		9677138913A8AAFE00C34471 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = Release;
 		};
@@ -302,6 +361,7 @@
 				96531AE113A8AD5F00FC6ED1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96531AED13A8AD6A00FC6ED1 /* Build configuration list for PBXNativeTarget "vfdecrypt" */ = {
 			isa = XCConfigurationList;
@@ -310,6 +370,7 @@
 				96531AEF13A8AD6A00FC6ED1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9677138613A8AAFE00C34471 /* Build configuration list for PBXProject "vilefault" */ = {
 			isa = XCConfigurationList;

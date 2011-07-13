@@ -41,7 +41,8 @@ typedef struct {
 
 /* this structure is valid only if there's a recovery key defined */
 typedef struct {
-  uint8_t filler1[0x2a8];
+//  uint8_t filler1[0x2a8];
+	uint8_t filler1[0xb8];
   uint32_t kdf_algorithm;
   uint32_t kdf_prng_algorithm;
   uint32_t kdf_iteration_count;
